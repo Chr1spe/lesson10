@@ -15,16 +15,18 @@ class PostController extends Controller
     }
     //
 
-    public function index(Posts $posts)
+    public function index()
     {
 
         //return session('message');
 
-        $posts = $posts->all();
+        //$posts = $posts->all();
 
-    	/*$posts = Post::latest()
+        //return $tag;
+
+    	$posts = Post::latest()
             ->filter(request(['month', 'year']))
-            ->get();*/
+            ->get();
 
         //$archives = Post::archives();
 
