@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Repositories\Posts;
 
 class PostController extends Controller
 {
@@ -14,12 +15,16 @@ class PostController extends Controller
     }
     //
 
-    public function index()
+    public function index(Posts $posts)
     {
 
-    	$posts = Post::latest()
+        //return session('message');
+
+        $posts = $posts->all();
+
+    	/*$posts = Post::latest()
             ->filter(request(['month', 'year']))
-            ->get();
+            ->get();*/
 
         //$archives = Post::archives();
 
@@ -74,6 +79,8 @@ class PostController extends Controller
         auth()->user()->publish(
             new Post(request(['title', 'body']))
         );
+
+        session()->flash('message', 'Your post has now been published.');
 
     	return redirect('/');
 
