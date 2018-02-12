@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -18,7 +19,7 @@ class CommentController extends Controller
 
 		$this->validate(request(),['body' => 'required']);
 
-		$post->addComment(request('body'));
+		$post->addComment(request('body'), Auth::user());
 
 		return back();
 	}

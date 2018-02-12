@@ -19,14 +19,17 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function addComment($body)
+    public function addComment($body, $user)
     {
     	/*Comment::create([
     		'body' => $body,
     		'post_id' => $this->id
     	]);*/
 
-    	$this->comments()->create(compact('body'));
+    	$this->comments()->create([
+    	    'body'    => $body,
+            'user_id' => $user->id
+        ]);
     }
 
     public function scopeFilter($query, $filters)
